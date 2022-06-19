@@ -1,28 +1,33 @@
-import React,{useState,useEffect} from 'react'
-import axios from 'axios';
-import {Row, Col} from 'react-bootstrap'
-import ProductScreen from '../products/ProductScreen';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { listProducts } from "../../redux/actions/productAction";
+import { Row, Col } from "react-bootstrap";
+import ProductScreen from "../products/ProductScreen";
 
 const HomeScreen = () => {
-  const [Products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products } = productList;
+  console.log(products);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const {data} = await axios.get("http://localhost:8080/api/products");
-      setProducts(data)
-    };
-    fetchProducts();
-  }, [])
+    dispatch(listProducts());
+  }, []);
+  const Products = [];
   return (
     <>
-    <Row>
-        {Products.map((product,index)=> (
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <Row>
+          {products.map((product, index) => (
             <Col key={index} md={3}>
-            <ProductScreen product={product}/>
+              <ProductScreen product={product} />
             </Col>
-        ))}
-    </Row>
+          ))}
+        </Row>
+      )}
     </>
-  )
-}
-export default HomeScreen
+  );
+};
+export default HomeScreen;

@@ -3,6 +3,7 @@ const products = require("./data/products");
 const dotenv = require("dotenv");
 const connectDb = require("./config/config");
 const productRoute = require("./routes/ProductRoute");
+const { errorHandler } = require("./middlewares/errorMiddleware");
 // env config
 dotenv.config();
 // connecting db
@@ -21,7 +22,8 @@ app.get("/", (req, res) => {
   res.send("<h1>Welcome to node server</h1>");
 });
 
-app.use("/api",productRoute)
+app.use("/api", productRoute);
+app.use(errorHandler);
 const PORT = 8080;
 app.listen(process.env.PORT || PORT, () => {
   console.log(
