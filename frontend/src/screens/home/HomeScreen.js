@@ -3,21 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../../redux/actions/productAction";
 import { Row, Col } from "react-bootstrap";
 import ProductScreen from "../products/ProductScreen";
+import Loader from "../../components/shared/loader/Loader";
+import Message from "../../components/shared/alert/Message";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
-  console.log(products);
+  console.log("products in home scree",products);
 
   useEffect(() => {
     dispatch(listProducts());
-  }, []);
-  const Products = [];
+  }, [dispatch]);
   return (
     <>
       {loading ? (
-        <h2>Loading...</h2>
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
       ) : (
         <Row>
           {products.map((product, index) => (

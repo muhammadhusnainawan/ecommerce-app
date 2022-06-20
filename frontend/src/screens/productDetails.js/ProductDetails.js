@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import {
@@ -10,18 +11,15 @@ import {
   Button,
 } from "react-bootstrap";
 import Rating from "../../components/rating/Rating";
-import axios from "axios";
-
+import { detailsProduct } from "../../redux/actions/productAction";
 const ProductDetails = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState([]);
+  const dispatch = useDispatch();
+  const productDet = useSelector((state) => state.productDetails);
+  const { loading, error, product } = productDet;
   useEffect(() => {
-    const fetchProduct = async () => {
-      const { data } = await axios.get(`http://localhost:8080/api/products/${id}`);
-      setProduct(data);
-    };
-    fetchProduct();
-  }, []);
+    dispatch(detailsProduct(id));
+  }, [dispatch,id]);
   return (
     <div>
       <Link to="/" className="btn btn-light">
