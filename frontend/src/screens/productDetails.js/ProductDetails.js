@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -9,11 +9,13 @@ import {
   ListGroup,
   ListGroupItem,
   Button,
+  Form,
 } from "react-bootstrap";
 import Rating from "../../components/rating/Rating";
 import { detailsProduct } from "../../redux/actions/productAction";
 import Loader from "../../components/shared/loader/Loader";
 const ProductDetails = () => {
+  const [qty, setQty] = useState(0);
   const { id } = useParams();
   const dispatch = useDispatch();
   const productDet = useSelector((state) => state.productDetails);
@@ -24,9 +26,9 @@ const ProductDetails = () => {
   return (
     <div>
       <Link to="/" className="btn btn-light">
-            <i className="fa fa-arrow-left"></i>
-            &nbsp; GO BACK
-          </Link>
+        <i className="fa fa-arrow-left"></i>
+        &nbsp; GO BACK
+      </Link>
       {loading ? (
         <Loader />
       ) : (
@@ -59,6 +61,24 @@ const ProductDetails = () => {
                   </Col>
                 </Row>
               </ListGroupItem>
+              {product.countInStock > 0 && (
+                <ListGroupItem>
+                  <Row>
+                    <Col>Qty</Col>
+                    <Form.Control
+                      as="select"
+                      value={qty}
+                      onChange={(e) => setQty(e.target.value)}
+                    >
+                      {[...Array(product.countInStock).keys()].map((x) => {
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>;
+                      })}
+                    </Form.Control>
+                  </Row>
+                </ListGroupItem>
+              )}
               <ListGroupItem>
                 <Button className="btn w-100" type="button">
                   Add to cart
