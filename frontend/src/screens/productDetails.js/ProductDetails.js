@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useParams,useNavigate } from "react-router-dom";
 import {
   Row,
@@ -18,14 +18,12 @@ const ProductDetails = () => {
   const [qty, setQty] = useState(1);
   const { id } = useParams();
   const navigate = useNavigate();
-  console.log(navigate);
-
   const addToCartHandler = () => {
-    navigate(`/cart/${id}?qty=${qty}`);
+     navigate(`/cart/${id}qty=${qty}`);
   };
   const dispatch = useDispatch();
-  const productDet = useSelector((state) => state.productDetails);
-  const { loading, error, product } = productDet;
+  const productDetails = useSelector((state) => state.productDetails);
+  const { loading, error, product } = productDetails;
   useEffect(() => {
     dispatch(detailsProduct(id));
   }, [dispatch, id]);

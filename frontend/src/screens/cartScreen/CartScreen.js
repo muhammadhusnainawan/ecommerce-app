@@ -4,6 +4,18 @@ const CartScreen = () => {
   return (
     <div>
        <h1>Cart Screen</h1> 
+       <h1>Cart Screen</h1> 
+       <h1>Cart Screen</h1> 
+       <h1>Cart Screen</h1> 
+       <h1>Cart Screen</h1> 
+       <h1>Cart Screen</h1> 
+       <h1>Cart Screen</h1> 
+       <h1>Cart Screen</h1> 
+       <h1>Cart Screen</h1> 
+       <h1>Cart Screen</h1> 
+       <h1>Cart Screen</h1> 
+       <h1>Cart Screen</h1> 
+       <h1>Cart Screen</h1> 
     </div>
   )
 }

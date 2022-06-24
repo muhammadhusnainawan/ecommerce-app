@@ -15,12 +15,8 @@ function App() {
           <Container className="my-3">
             <Routes>
               <Route exact path="/" element={<HomeScreen />} />
-            </Routes>
-            <Routes>
-              <Route path="/product/:id" element={<ProductDetails />} />
-            </Routes>
-            <Routes>
-              <Route path="/cart/:id?" element={<CartScreen />} />
+              <Route exact path="/product/:id" element={<ProductDetails />} />
+              <Route exact path="/cart/:id" element={<CartScreen />} />
             </Routes>
           </Container>
         </div>
