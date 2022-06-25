@@ -19,7 +19,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const addToCartHandler = () => {
-     navigate(`/cart/${id}qty=${qty}`);
+     navigate(`/cart/${id}?qty=${qty}`);
   };
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
