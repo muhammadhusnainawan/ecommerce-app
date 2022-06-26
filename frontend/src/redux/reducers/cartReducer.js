@@ -5,7 +5,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
     case CART_ADD_ITEM:
       const item = action.payload;
       const existedItemInCart = state.cartItems.find(
-        (x) => x.product === item.product
+        (x) => x.productId === item.productId
       );
       if (existedItemInCart) {
         return {
@@ -20,5 +20,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
           cartItems: [...state.cartItems, item],
         };
       }
+      default:
+      return state;
   }
 };
